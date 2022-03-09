@@ -1,9 +1,0 @@
-<panel>
- <event>
-   <search>
-     <query>| savedsearch DA-ITSI-VIRTUALIZATION-Hypervisor_Events_Search hypervisor_id="$hypervisor_id$"</query>
-     <earliest>$earliest$</earliest>
-     <latest>$latest$</latest>
-   </search>
- </event>
-</panel>

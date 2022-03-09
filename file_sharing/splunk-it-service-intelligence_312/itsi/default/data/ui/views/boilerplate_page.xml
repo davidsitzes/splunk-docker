@@ -1,5 +1,0 @@
-<?xml version="1.0"?>
-<!--Copyright (C) 2005-2018 Splunk Inc. All Rights Reserved.-->
-<view template="itsi:/templates/generic_page.html" type="html" isDashboard="False">
-	<label>Boilerplate Page</label>
-</view>

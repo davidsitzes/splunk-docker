@@ -1,9 +1,0 @@
-<panel>
-  <event>
-    <search>
-      <query>index=* host=$host$ tag=oshost</query>
-      <earliest>$earliest$</earliest>
-      <latest>$latest$</latest>
-    </search>
-  </event>
-</panel>

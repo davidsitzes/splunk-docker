@@ -1,6 +1,0 @@
-[commands]
-access = read : [ * ], write : [ admin, power ]
-export = system
-
-[collections/itsi_anomaly_detection]
-access = read : [ itoa_admin, itoa_analyst, itoa_user ], write: [ itoa_admin ]

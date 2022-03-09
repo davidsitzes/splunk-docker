@@ -1,9 +1,0 @@
-<panel>
-  <event>
-    <search>
-      <query>| savedsearch DA-ITSI-DATABASE-Database_Instances_Events database_instance="$database_instance$"</query>
-      <earliest>$earliest$</earliest>
-      <latest>$latest$</latest>
-    </search>
-  </event>
-</panel>

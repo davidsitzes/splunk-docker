@@ -1,5 +1,0 @@
-<?xml version="1.0"?>
-<!--Copyright (C) 2005-2018 Splunk Inc. All Rights Reserved.-->
-<view template="itsi:/templates/correlation_search_edit.html" type="html" isDashboard="False">
-    <label>Correlation Search</label>
-</view>

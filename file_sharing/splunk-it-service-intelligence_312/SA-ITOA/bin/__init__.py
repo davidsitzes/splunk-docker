@@ -1,1 +1,0 @@
-# The bin folder/package is meant for Splunk runnables and externally shared executables only

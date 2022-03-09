@@ -1,1 +1,0 @@
-For information about this module, refer to the documentation here - http://docs.splunk.com/Documentation/ITSI/latest/IModules/AbouttheOperatingSystemModule
