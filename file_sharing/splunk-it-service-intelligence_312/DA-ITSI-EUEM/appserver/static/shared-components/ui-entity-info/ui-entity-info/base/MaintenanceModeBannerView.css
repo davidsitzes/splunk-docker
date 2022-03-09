@@ -1,0 +1,35 @@
+.maintenance-mode-banner {
+	border: 1px solid #5FB4DE;
+	border-radius: 4px;
+	background-color: #DFF0F8;
+	color: #333;
+	position: fixed;
+	top: 90px;
+	left: 0;
+	right: 0;
+	margin:0 auto;
+	display: none;
+}
+
+.info-icon {
+	display: inline-block;
+	padding:0px 0px 0px 15px;
+	color: #5FB4DE;
+	font-size: 24px;
+	transform: translateY(25%);
+}
+
+.maintenance-mode-banner-text {
+	display: inline-block;
+	padding: 0px 15px 0px 15px;
+	font-size: 14px;
+	line-height: 46px;
+}
+
+.close-btn {
+	display: inline-block;
+	color: #5FB4DE;
+	font-size: 14px;
+	padding:0px 15px 0px 0px;
+	cursor: pointer;
+}

@@ -1,0 +1,54 @@
+@font-face {
+    font-family: 'icokate';
+    src: url('icokate.woff') format('woff');
+    font-weight: normal;
+    font-style: normal;
+}
+
+[class^="icon-itsi-icon-"]:before, [class*=" icon-itsi-icon-"]:before {
+    font-family: 'icokate';
+    speak: none;
+    font-style: normal;
+    font-weight: normal;
+    font-variant: normal;
+    text-transform: none;
+    line-height: 1;
+
+    /* Better Font Rendering =========== */
+    -webkit-font-smoothing: antialiased;
+    -moz-osx-font-smoothing: grayscale;
+}
+
+.icon-itsi-icon-tool:before {
+    content: "\e909";
+}
+.icon-itsi-icon-gtcircle:before {
+    content: "\e907";
+}
+.icon-itsi-icon-gtrect:before {
+    content: "\e908";
+}
+.icon-itsi-icon-doublearrow-down:before {
+    content: "\e900";
+}
+.icon-itsi-icon-doublearrow-left:before {
+    content: "\e901";
+}
+.icon-itsi-icon-doublearrow-right:before {
+    content: "\e902";
+}
+.icon-itsi-icon-doublearrow-up:before {
+    content: "\e903";
+}
+.icon-itsi-icon-fullscreen-enter:before {
+    content: "\e904";
+}
+.icon-itsi-icon-fullscreen-exit:before {
+    content: "\e905";
+}
+.icon-itsi-icon-sortby:before {
+    content: "\e906";
+}
+.icon-itsi-icon-distro-stream:before {
+    content: "\e614";
+}

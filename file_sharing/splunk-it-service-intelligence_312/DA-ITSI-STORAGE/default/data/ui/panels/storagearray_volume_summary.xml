@@ -1,0 +1,18 @@
+<panel>
+  <title>Volume Details</title>
+  <table id="storagearrayvolumetable">
+	<search>
+	  <query>| savedsearch DA-ITSI-STORAGE-Storage_Array_Volume_Summary_Search array_id=$array_id$</query>
+	  <earliest>$earliest$</earliest>
+      <latest>$latest$</latest>
+	  <sampleRatio>1</sampleRatio>
+	</search>
+	<option name="count">5</option>
+	<option name="dataOverlayMode">none</option>
+	<option name="drilldown">cell</option>
+	<option name="percentagesRow">false</option>
+	<option name="rowNumbers">false</option>
+	<option name="totalsRow">false</option>
+	<option name="wrap">true</option>
+  </table>
+</panel>

@@ -1,0 +1,98 @@
+<dashboard script="DA-ITSI-LB-Load_Balancer_View.js" isVisible="False">
+  <label>Load Balancer Appliance Details</label>
+  <row>
+    <panel>
+      <viz type="SA-ITSI-CustomModuleViz.entity_info_header">
+        <option name="link.visible">false</option>
+        <option name="refresh.time.visible">false</option>
+        <search>
+          <query>| savedsearch DA-ITSI-LB-LoadBalancer_Inventory host="$host$"</query>
+          <earliest>-6h</earliest>
+          <latest>now</latest>
+        </search>
+      </viz>
+
+      <viz type="SA-ITSI-CustomModuleViz.mini_chart">
+        <option name="SA-ITSI-CustomModuleViz.mini_chart.id">lb-cpu-history</option>
+        <option name="SA-ITSI-CustomModuleViz.mini_chart.title">CPU Usage (%)</option>
+        <option name="SA-ITSI-CustomModuleViz.mini_chart.subtitleField">_stats</option>
+        <option name="SA-ITSI-CustomModuleViz.mini_chart.chartType">area</option>
+        <search>
+          <query>| savedsearch DA-ITSI-LB-Loadbalancer_CTX_Performance_CPU host="$host$"</query>
+          <earliest>$earliest$</earliest>
+          <latest>$latest$</latest>
+        </search>
+      </viz>
+      <viz type="SA-ITSI-CustomModuleViz.mini_chart">
+        <option name="SA-ITSI-CustomModuleViz.mini_chart.id">lb-memory-history</option>
+        <option name="SA-ITSI-CustomModuleViz.mini_chart.title">Memory Used (%)</option>
+        <option name="SA-ITSI-CustomModuleViz.mini_chart.subtitleField">_stats</option>
+        <option name="SA-ITSI-CustomModuleViz.mini_chart.chartType">area</option>
+        <search>
+          <query>| savedsearch DA-ITSI-LB-Loadbalancer_CTX_Performance_Memory host="$host$"</query>
+          <earliest>$earliest$</earliest>
+          <latest>$latest$</latest>
+        </search>
+      </viz>
+
+    </panel>
+  </row>
+
+  <row id="tabs">
+    <panel id="tabs_panel">
+      <viz type="SA-ITSI-CustomModuleViz.tab_viz">
+        <option name="link.visible">false</option>
+        <option name="refresh.time.visible">false</option>
+        <search>
+          <query>|noop | stats count</query>
+        </search>
+      </viz>
+    </panel>
+  </row>
+
+  <row depends="$control_overview$">
+    <panel ref="overview_availability" app="DA-ITSI-LB"></panel>
+    <panel ref="overview_failover" app="DA-ITSI-LB"></panel>
+  </row>
+  <row depends="$control_overview$">
+    <panel ref="overview_rtt" app="DA-ITSI-LB"></panel>
+    <panel ref="overview_sessions" app="DA-ITSI-LB"></panel>
+  </row>
+  <row depends="$control_overview$">
+    <panel ref="overview_server_connections" app="DA-ITSI-LB"></panel>
+    <panel ref="overview_client_connections" app="DA-ITSI-LB"></panel>
+  </row>
+  <row depends="$control_client$">
+    <panel ref="client_throughput" app="DA-ITSI-LB"></panel>
+    <panel ref="client_connections" app="DA-ITSI-LB"></panel>
+  </row>
+  <row depends="$control_client$">
+    <panel ref="client_ssl_tps" app="DA-ITSI-LB"></panel>
+  </row>
+  <row depends="$control_server$">
+    <panel ref="server_throughput" app="DA-ITSI-LB"></panel>
+    <panel ref="server_connections" app="DA-ITSI-LB"></panel>
+  </row>
+  <row depends="$control_server$">
+    <panel ref="server_5XX_codes" app="DA-ITSI-LB"></panel>
+    <panel ref="server_rtt" app="DA-ITSI-LB"></panel>
+  </row>
+  <row depends="$control_server_pools$">
+    <panel ref="server_pools_pools" app="DA-ITSI-LB"></panel>
+  </row>
+  <row depends="$control_server_pools$">
+    <panel ref="server_pools_members" app="DA-ITSI-LB"></panel>
+  </row>
+  <row depends="$control_system$">
+    <panel ref="system_cpu" app="DA-ITSI-LB"></panel>
+  </row>
+  <row depends="$control_system$">
+    <panel ref="system_memory" app="DA-ITSI-LB"></panel>
+  </row>
+  <row depends="$control_system$">
+    <panel ref="system_storage" app="DA-ITSI-LB"></panel>
+  </row>
+  <row depends="$control_splunk_events$">
+    <panel ref="splunk_events" app="DA-ITSI-LB"></panel>
+  </row>
+</dashboard>

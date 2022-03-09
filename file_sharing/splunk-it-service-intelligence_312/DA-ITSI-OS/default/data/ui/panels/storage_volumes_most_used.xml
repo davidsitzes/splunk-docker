@@ -1,0 +1,22 @@
+<panel id="storage_volume_most_used">
+  <chart>
+    <title>Storage Free Space</title>
+    <search id="storage_volumes_most_used_search_base">
+      <query>
+index=* host=$host$ tag=oshost tag=performance tag=storage (storage_free_percent=* OR storage=* storage_used=* OR mount=*) 
+| stats latest(storage) as MegabytesTotal, latest(storage_used) as MegabytesUsed, latest(storage_used_percent) as PercentUsed by mount 
+| sort - PercentUsed limit=1 
+| eval "Free (GB) - {mount}" = (MegabytesTotal - MegabytesUsed) / 1024 
+| eval "Used (GB) - {mount}" = MegabytesUsed / 1024 
+| table * 
+| fields - MegabytesUsed, PercentUsed, MegabytesTotal, mount 
+| transpose 
+| rename column as "Statistic", "row 1" as "Space"
+      </query>
+      <earliest>$earliest$</earliest>
+      <latest>$latest$</latest>
+    </search>
+    <option name="charting.chart">pie</option>
+    <option name="refresh.time.visible">false</option>
+  </chart>
+</panel>

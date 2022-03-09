@@ -1,0 +1,31 @@
+<panel>
+  <title>Histogram of Storage Array Used (%)</title>
+  <chart>
+    <search>
+      <query>| savedsearch DA-ITSI-STORAGE-Storage_Array_Histogram_Chart_Storage_Used_Search array_id="$array_id$"</query>
+      <earliest>$earliest$</earliest>
+      <latest>$latest$</latest>
+    </search>
+	<option name="charting.axisTitleX.visibility">visible</option>
+	<option name="charting.axisTitleY.visibility">visible</option>
+	<option name="charting.axisX.scale">linear</option>
+	<option name="charting.axisY.scale">linear</option>
+	<option name="charting.chart">column</option>
+	<option name="charting.seriesColors">[0x99D18B,0x31A35F,0xFFE98C,0xFCB64E,0xB50101]</option>
+	<option name="charting.chart.bubbleSizeBy">area</option>
+	<option name="charting.chart.nullValueMode">gaps</option>
+	<option name="charting.chart.showDataLabels">none</option>
+	<option name="charting.chart.stackMode">stacked</option>
+	<option name="charting.legend.placement">top</option>
+    <option name="refresh.time.visible">false</option>
+	<option name="charting.drilldown">all</option>
+	<drilldown>
+		<condition match="'click.value'==&quot;100&quot;">
+			<link target="blank">search?earliest=$earliest$&amp;latest=$latest$&amp;q=`stretch_inventory_earliest_time` tag=storagepool tag=inventory tag=storagesystem array_id="$array_id$" pool_id="$click.name2$" storage_used_percent=100</link>
+		</condition>
+		<condition>
+			<link target="_blank">search?earliest=$earliest$&amp;latest=$latest$&amp;q=`stretch_inventory_earliest_time` tag=storagepool tag=inventory tag=storagesystem array_id="$array_id$" pool_id="$click.name2$" storage_used_percent=* | eval range=split("$click.value$","-") | eval lowerrange= mvindex(range,0) ,upperrange=mvindex(range,1) | where storage_used_percent&gt;=lowerrange AND storage_used_percent&lt;upperrange</link>
+		</condition>
+	</drilldown>
+  </chart>
+</panel>

@@ -1,0 +1,11 @@
+<panel>
+  <table id="vmhighlatencytable">
+    <title>Top 10 Virtual Machines With Highest Latency in ms</title>
+    <search>
+      <query>| savedsearch DA-ITSI-VIRTUALIZATION-Hypervisor_List_Connected_VM_Highest_Latency hypervisor_id="$hypervisor_id$"</query>
+      <earliest>$earliest$</earliest>
+      <latest>$latest$</latest>
+    </search>
+    <fields>"VM Name","Storage Highest Latency (ms)"</fields>
+  </table>
+</panel>

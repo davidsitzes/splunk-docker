@@ -1,0 +1,9 @@
+<panel>
+  <event>
+    <search>
+      <query>| savedsearch DA-ITSI-APPSERVER-ApplicationServer_Events application_server="$application_server$"</query>
+      <earliest>$earliest$</earliest>
+      <latest>$latest$</latest>
+    </search>
+  </event>
+</panel>

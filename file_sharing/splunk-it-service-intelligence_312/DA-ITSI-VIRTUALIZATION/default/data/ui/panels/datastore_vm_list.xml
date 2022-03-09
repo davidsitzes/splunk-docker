@@ -1,0 +1,14 @@
+<panel>
+  <title>List of Virtual Machine</title>
+  <input type="text" token="vm_name" searchWhenChanged="true">
+    <label>Search Virtual Machine</label>
+    <default></default>
+  </input>
+  <table id="dsvmtable">
+    <search>
+      <query>| savedsearch DA-ITSI-VIRTUALIZATION-Datastore_List_Connected_VM_Search datastore_id="$datastore_id$" vm_name="$vm_name$"</query>
+      <earliest>$earliest$</earliest>
+      <latest>$latest$</latest>
+    </search>
+  </table>
+</panel>

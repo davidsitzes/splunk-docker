@@ -1,0 +1,27 @@
+<panel>
+  <table>
+    <title>Filesystems</title>
+    <search>
+      <query>
+index=* host=$host$ tag=oshost tag=performance tag=storage (storage_free_percent=* OR storage=* storage_used=* OR mount=*) 
+| stats latest(storage_free_percent) as storage_free_percent latest(storage) as "Size", latest(storage_used) as "Used" by mount 
+| rename mount as "Device" 
+| `get-closest-disk-unit(Size)` 
+| eval storage_free_percent = round(storage_free_percent, 2) 
+| eval Size=round(Size/divisor, 2)." ".unit_to_use 
+| eval Used=round(Used/divisor, 2)." ".unit_to_use 
+| fields - divisor, unit_to_use 
+| rename storage_free_percent as "% Free" 
+| search "% Free"=*
+      </query>
+      <earliest>$earliest$</earliest>
+      <latest>$latest$</latest>
+    </search>
+    <option name="wrap">true</option>
+    <option name="rowNumbers">false</option>
+    <option name="drilldown">cell</option>
+    <option name="dataOverlayMode">none</option>
+    <option name="count">10</option>
+    <option name="refresh.time.visible">false</option>
+  </table>
+</panel>

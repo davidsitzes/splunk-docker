@@ -1,0 +1,11 @@
+<panel>
+  <table id="vmcpudemandtable">
+    <title>Top 10 Virtual Machines With Highest CPU Demand</title>
+    <search>
+      <query>| savedsearch DA-ITSI-VIRTUALIZATION-Hypervisor_List_Connected_VM_CPU_Demand hypervisor_id="$hypervisor_id$"</query>
+      <earliest>$earliest$</earliest>
+      <latest>$latest$</latest>
+    </search>
+    <fields>"VM Name","CPU Demand (MHz)"</fields>
+  </table>
+</panel>

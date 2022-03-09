@@ -1,0 +1,9 @@
+<panel>
+ <event>
+   <search>
+     <query>| savedsearch DA-ITSI-STORAGE-Disk_Events_Search disk_id="$disk_id$"</query>
+     <earliest>$earliest$</earliest>
+     <latest>$latest$</latest>
+   </search>
+ </event>
+</panel>

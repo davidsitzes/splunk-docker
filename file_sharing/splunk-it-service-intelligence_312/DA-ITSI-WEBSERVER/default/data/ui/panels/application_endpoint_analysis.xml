@@ -1,0 +1,10 @@
+<panel>
+  <table>
+    <title>Endpoint Analysis</title>
+    <search>
+      <query><![CDATA[web_server=$web_server$ tag=web tag=activity | eval 4xx=if(status >= 400 AND status < 500, status, null()), 5xx=if(status >= 500 AND status < 600, status, null()) | stats count(_raw) as requests, count(4xx) as 4xx, count(5xx) as 5xx, avg(response_time) as response_time by uri_path | fields + uri_path, requests, 4xx, 5xx, response_time | sort -requests, -5xx, -4xx, -response_time]]></query>
+      <earliest>$earliest$</earliest>
+      <latest>$latest$</latest>
+    </search>
+  </table>
+</panel>

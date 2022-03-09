@@ -1,0 +1,15 @@
+<panel>
+  <table>
+    <title>Connected NIC Network Usage (KBps)</title>
+    <search>
+      <query>| savedsearch DA-ITSI-VIRTUALIZATION-Hypervisor_NIC_Search hypervisor_id="$hypervisor_id$"</query>
+      <earliest>$earliest$</earliest>
+      <latest>$latest$</latest>
+    </search>
+	<option name="drilldown">row</option>
+	<option name="rowNumbers">false</option>
+   <drilldown>
+     <set token="nic_id_token">$click.value$</set>
+   </drilldown>
+  </table>
+</panel>

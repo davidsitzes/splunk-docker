@@ -1,0 +1,9 @@
+<panel>
+ <event>
+   <search>
+     <query>| savedsearch DA-ITSI-VIRTUALIZATION-Datastore_Events_Search datastore_id="$datastore_id$"</query>
+     <earliest>$earliest$</earliest>
+     <latest>$latest$</latest>
+   </search>
+ </event>
+</panel>

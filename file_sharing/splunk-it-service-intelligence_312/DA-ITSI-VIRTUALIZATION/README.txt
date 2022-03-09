@@ -1,0 +1,1 @@
+For more information on the Splunk ITSI Module for Virtualization please see official documentation here - http://docs.splunk.com/Documentation/ITSI/latest/IModules/AboutVirtualizationModule

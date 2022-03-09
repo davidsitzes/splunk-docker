@@ -1,0 +1,10 @@
+<panel>
+  <table id="hypervisordstable">
+    <title>Datastore</title>
+    <search>
+      <query>| savedsearch DA-ITSI-VIRTUALIZATION-Hypervisor_List_Connected_Datastore_Search hypervisor_id="$hypervisor_id$"</query>
+      <earliest>$earliest$</earliest>
+      <latest>$latest$</latest>
+    </search>
+  </table>
+</panel>

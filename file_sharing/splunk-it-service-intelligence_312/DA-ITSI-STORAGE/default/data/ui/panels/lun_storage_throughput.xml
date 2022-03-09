@@ -1,0 +1,21 @@
+<panel>
+  <title>LUN Throughput (MBps)</title>
+  <chart>
+    <search>
+      <query>| savedsearch DA-ITSI-STORAGE-LUN_Chart_Throughput_Search lun_id="$lun_id$"</query>
+      <earliest>$earliest$</earliest>
+      <latest>$latest$</latest>
+    </search>
+	<option name="charting.axisTitleX.visibility">visible</option>
+	<option name="charting.axisTitleY.visibility">visible</option>
+	<option name="charting.axisX.scale">linear</option>
+	<option name="charting.axisY.scale">linear</option>
+	<option name="charting.chart">area</option>
+	<option name="charting.chart.bubbleSizeBy">area</option>
+	<option name="charting.chart.nullValueMode">connect</option>
+	<option name="charting.chart.showDataLabels">none</option>
+	<option name="charting.chart.stackMode">default</option>
+	<option name="charting.legend.placement">top</option>
+	<option name="refresh.time.visible">0</option>
+  </chart>
+</panel>

@@ -1,0 +1,16 @@
+[commands]
+access = read : [ * ], write: [ admin ]
+
+[commands/mad]
+export = system
+owner = nobody
+
+[commands/naccum]
+export = system
+owner = nobody
+
+[collections/service_context]
+access = read : [ metric_ad_user ], write: [ metric_ad_admin ]
+
+[collections/instance_config]
+access = read : [ metric_ad_user ], write: [ metric_ad_admin ]

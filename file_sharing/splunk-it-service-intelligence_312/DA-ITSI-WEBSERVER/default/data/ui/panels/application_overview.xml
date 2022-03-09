@@ -1,0 +1,10 @@
+<panel>
+  <table>
+    <title>Application Overview</title>
+    <search>
+      <query><![CDATA[web_server=$web_server$ tag=web tag=activity | eval 4xx=if(status >= 400 AND status < 500, status, null()), 5xx=if(status >= 500, status, null()) | stats count(_raw) as hits, count(4xx) as "4xx (count)", count(5xx) as "5xx (count)", avg(response_time) as "Response Time (ms)" by site | addinfo | eval hits_per_minute=((hits)/(info_max_time - info_min_time))*60 | rename hits_per_minute as "Hits Per Minute (count)" | fields + site, "4xx (count)", "5xx (count)", "Response Time (ms)", "Hits Per Minute (count)"]]></query>
+      <earliest>$earliest$</earliest>
+      <latest>$latest$</latest>
+    </search>
+  </table>
+</panel>

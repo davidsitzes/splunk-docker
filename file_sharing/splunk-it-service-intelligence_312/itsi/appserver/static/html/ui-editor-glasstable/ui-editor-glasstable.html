@@ -1,0 +1,80 @@
+<!-- Copyright (C) 2005-2018 Splunk Inc. All Rights Reserved. -->
+<!-- shameless copy paste of the core base.html modified to allow for extra routes -->
+
+<%!
+if cherrypy.config['product_type'] == 'hunk':
+	faviconFile = 'favicon_hunk.ico'
+elif cherrypy.config['product_type'] == 'enterprise':
+	faviconFile = 'favicon.ico'
+else:
+	faviconFile = 'favicon.ico'
+
+app_name = cherrypy.request.path_info.split('/')[3]
+app_root = "/" + "/".join(["static","app",app_name])
+app_css_built = app_root + "/css"
+app_css = "%s/*.css" % app_css_built
+
+%>\
+<!doctype html>
+<!--[if lt IE 7]> <html lang="${i18n.current_lang()[0]|h}" class="no-js ie  lt-ie9 lt-ie8 lt-ie7"> <![endif]-->
+<!--[if IE 7]>	<html lang="${i18n.current_lang()[0]|h}" class="no-js ie7 lt-ie9 lt-ie8"> <![endif]-->
+<!--[if IE 8]>	<html lang="${i18n.current_lang()[0]|h}" class="no-js ie8 lt-ie9"> <![endif]-->
+<!--[if IE 9]>	<html lang="${i18n.current_lang()[0]|h}" class="no-js ie9"> <![endif]-->
+<!--[if gt IE 9]><!--> <html lang="${i18n.current_lang()[0]|h}" class="no-js"> <!--<![endif]-->
+<head>
+	<meta charset="utf-8" />
+	<meta http-equiv="X-UA-Compatible" content="IE=edge" />
+	<title>${_('Loading...')}</title>
+	<meta name="description" content="listen to your data" />
+	<meta name="author" content="Splunk Inc." />
+	<meta name="viewport" content="width=1024, initial-scale=1.0" />
+	<link rel="shortcut icon" href="${make_url('/static/img/' + faviconFile)}" />
+	<link rel="apple-touch-icon-precomposed" sizes="57x57" href="${make_url('/static/img/bookmark/apple-icon-57x57-precomposed.png')}" />
+	<link rel="apple-touch-icon-precomposed" sizes="72x72" href="${make_url('/static/img/bookmark/apple-icon-72x72-precomposed.png')}" />
+	<link rel="apple-touch-icon-precomposed" sizes="114x114" href="${make_url('/static/img/bookmark/apple-icon-114x114-precomposed.png')}" />
+	<link rel="apple-touch-icon-precomposed" sizes="144x144" href="${make_url('/static/img/bookmark/apple-icon-144x144-precomposed.png')}" />
+	<meta name="msapplication-TileColor" content="#65A637">
+	<meta name="msapplication-TileImage" content="${make_url('/static/img/bookmark/ms-tileicon-144x144.png')}">
+
+    <!-- statically link CSS in minified mode, hotlink minified in unminified mode -->
+	% if splunk.util.normalizeBoolean(cherrypy.config.get('minify_css')):
+		<link rel="stylesheet" type="text/css" media="all" href="${make_url( app_root + '/css/platform/build/bootstrap.min.css')}" />
+		<link rel="stylesheet" type="text/css" media="all" href="${make_url( app_root + '/css/platform/pages/dashboard-simple-bootstrap.min.css')}" />
+		<link rel="stylesheet" type="text/css" media="all" href="${make_url( app_root + '/css/platform/app/search/dashboard.css')}" />
+		<link rel="stylesheet" type="text/css" media="all" href="${make_url( app_root + '/css/platform/jqueryui/jquery.ui.all.css')}" />
+	% else:
+		<link rel="stylesheet" type="text/css" href="${make_url('/static/css/build/bootstrap.min.css', _qs=css_less_qs)}" />
+		<link rel="stylesheet" type="text/css" media="all" href="${make_url('/static/css/pages/dashboard-simple-bootstrap.min.css')}" />
+		<link rel="stylesheet" type="text/css" media="all" href="${make_url('/static/app/search/dashboard.css')}" />
+		<link rel="stylesheet" type="text/css" media="all" href="${make_url('/static/css/jqueryui/jquery.ui.all.css')}" />
+		<!-- Page specific css could be inserted here -->
+	% endif
+
+
+	<!--[if IE 7]><link rel="stylesheet" href="${make_url('/static/css/sprites-ie7.css', _qs=css_less_qs)}"><![endif]-->
+</head>
+<body>
+	${next.body() if hasattr(next, 'body') else ''}
+	<!-- live to code, code to live... -->
+	<%
+	config_qs = dict(autoload=1)
+	if hasattr(cherrypy.request, 'guest_pass') and cherrypy.request.guest_pass:
+		config_qs['guest_pass'] = 1
+	%>
+	<script src="${make_url('/config', _qs=config_qs)}"></script>
+	<script src="${make_url('/static/js/i18n.js')}"></script>
+	<script src="${make_url('/i18ncatalog?autoload=1')}"></script>
+	<script>
+	__splunkd_partials__ = ${json_decode(splunkd)};
+	</script>
+
+	<%
+	config_qs = dict(autoload=1)
+	if hasattr(cherrypy.request, 'guest_pass') and cherrypy.request.guest_pass:
+		config_qs['guest_pass'] = 1
+	page_path = "/static/app/" + app_name + "/js/build/" + page + ".js"
+	%>
+	<link rel="stylesheet" type="text/css" href="${make_url(app_root +'/css/ui-editor-glasstable/style.css')}" />
+	<script src="${make_url(page_path)}"></script>
+</body>
+</html>

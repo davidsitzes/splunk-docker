@@ -1,0 +1,63 @@
+<dashboard  script="DA-ITSI-STORAGE-Storage_Pool_Entity_View.js" isVisible="False">
+   <label>Storage Pool Details</label>
+   <row>
+      <panel>
+         <viz type="SA-ITSI-CustomModuleViz.entity_info_header">
+           <option name="link.visible">false</option>
+           <option name="refresh.time.visible">false</option>
+           <search>
+             <query>| savedsearch DA-ITSI-STORAGE-Storage_Pool_Inventory_Search pool_id="$pool_id$"</query>
+             <earliest>-4d</earliest>
+             <latest>now</latest>
+           </search>
+         </viz>
+         <viz type="SA-ITSI-CustomModuleViz.mini_chart">
+           <option name="SA-ITSI-CustomModuleViz.mini_chart.id">storagepool-events</option>
+           <option name="SA-ITSI-CustomModuleViz.mini_chart.title">Storage Pool Events (count)</option>
+           <option name="SA-ITSI-CustomModuleViz.mini_chart.subtitleField">_total</option>
+           <option name="SA-ITSI-CustomModuleViz.mini_chart.chartType">column</option>
+           <search>
+             <query>| savedsearch DA-ITSI-STORAGE-Storage_Pool_Context_Chart_Event_Search pool_id="$pool_id$"</query>
+             <earliest>$earliest$</earliest>
+             <latest>$latest$</latest>
+           </search>
+         </viz>
+         <viz type="SA-ITSI-CustomModuleViz.mini_chart">
+           <option name="SA-ITSI-CustomModuleViz.mini_chart.id">storage-used</option>
+           <option name="SA-ITSI-CustomModuleViz.mini_chart.title">Storage Pool Used (%)</option>
+           <option name="SA-ITSI-CustomModuleViz.mini_chart.subtitleField">_stats</option>
+           <option name="SA-ITSI-CustomModuleViz.mini_chart.chartType">area</option>
+           <search>
+             <query>| savedsearch DA-ITSI-STORAGE-Storage_Pool_Context_Chart_Storage_Used_Search pool_id="$pool_id$"</query>
+             <earliest>$earliest$</earliest>
+             <latest>$latest$</latest>
+           </search>
+         </viz>
+      </panel>
+   </row>
+   <row id="tabs">
+      <panel id="tabs_panel">
+         <viz type="SA-ITSI-CustomModuleViz.tab_viz">
+           <option name="link.visible">false</option>
+           <option name="refresh.time.visible">false</option>
+           <search>
+             <query>|noop | stats count</query>
+           </search>
+         </viz>
+      </panel>
+   </row>
+   <row depends="$control_overview$">
+      <panel ref="storagepool_iops" app="DA-ITSI-STORAGE" id="storagepool_iops" />
+      <panel ref="storagepool_storage_used_pie_chart" app="DA-ITSI-STORAGE" id="storagepool_storage_used_pie_chart" />
+      <panel ref="storagepool_storage_used" app="DA-ITSI-STORAGE" id="storagepool_storage_used" />
+   </row>
+   <row depends="$control_overview$">
+      <panel ref="storagepool_histogram_storage_used" app="DA-ITSI-STORAGE" id="storagepool_histogram_storage_used" />
+   </row>
+   <row depends="$control_error_events$">
+      <panel ref="storagepool_error_events" app="DA-ITSI-STORAGE" id="storagepool_error_events" />
+   </row>
+   <row depends="$control_events$">
+      <panel ref="storagepool_events" app="DA-ITSI-STORAGE" id="storagepool_events" />
+   </row>
+</dashboard>

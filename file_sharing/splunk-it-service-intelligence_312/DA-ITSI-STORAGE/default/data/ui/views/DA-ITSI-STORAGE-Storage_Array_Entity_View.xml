@@ -1,0 +1,93 @@
+<dashboard  script="DA-ITSI-STORAGE-Storage_Array_Entity_View.js" isVisible="False">
+   <label>Storage Array Details</label>
+   <row>
+      <panel>
+         <viz type="SA-ITSI-CustomModuleViz.entity_info_header">
+           <option name="link.visible">false</option>
+           <option name="refresh.time.visible">false</option>
+           <search>
+             <query>| savedsearch DA-ITSI-STORAGE-Storage_Array_Inventory_Search array_id="$array_id$"</query>
+             <earliest>-4d</earliest>
+             <latest>now</latest>
+           </search>
+         </viz>
+         <viz type="SA-ITSI-CustomModuleViz.mini_chart">
+           <option name="SA-ITSI-CustomModuleViz.mini_chart.id">storagearray-events</option>
+           <option name="SA-ITSI-CustomModuleViz.mini_chart.title">Storage Array Events (count)</option>
+           <option name="SA-ITSI-CustomModuleViz.mini_chart.subtitleField">_total</option>
+           <option name="SA-ITSI-CustomModuleViz.mini_chart.chartType">column</option>
+           <search>
+             <query>| savedsearch DA-ITSI-STORAGE-Storage_Array_Context_Chart_Event_Search array_id="$array_id$"</query>
+             <earliest>$earliest$</earliest>
+             <latest>$latest$</latest>
+           </search>
+         </viz>
+         <viz type="SA-ITSI-CustomModuleViz.mini_chart">
+           <option name="SA-ITSI-CustomModuleViz.mini_chart.id">highest-latency</option>
+           <option name="SA-ITSI-CustomModuleViz.mini_chart.title">Storage Array Highest Latency (ms)</option>
+           <option name="SA-ITSI-CustomModuleViz.mini_chart.subtitleField">_stats</option>
+           <option name="SA-ITSI-CustomModuleViz.mini_chart.chartType">area</option>
+           <search>
+             <query>| savedsearch DA-ITSI-STORAGE-Storage_Array_Context_Chart_Highest_Latency_Search array_id="$array_id$"</query>
+             <earliest>$earliest$</earliest>
+             <latest>$latest$</latest>
+           </search>
+         </viz>
+      </panel>
+   </row>
+   <row id="tabs">
+      <panel id="tabs_panel">
+         <viz type="SA-ITSI-CustomModuleViz.tab_viz">
+           <option name="link.visible">false</option>
+           <option name="refresh.time.visible">false</option>
+           <search>
+             <query>|noop | stats count</query>
+           </search>
+         </viz>
+      </panel>
+   </row>
+   <row depends="$control_overview$">
+      <panel ref="storagearray_storage_used_pie_chart" app="DA-ITSI-STORAGE" id="storagearray_storage_used_pie_chart" />
+      <panel ref="storagearray_storage_latency" app="DA-ITSI-STORAGE" id="storagearray_storage_latency" />
+      <panel ref="storagearray_iops" app="DA-ITSI-STORAGE" id="storagearray_iops" />
+   </row>
+   <row depends="$control_overview$">
+      <panel ref="storagearray_storage_throughput" app="DA-ITSI-STORAGE" id="storagearray_storage_throughput" />
+      <panel ref="storagearray_network_throughput" app="DA-ITSI-STORAGE" id="storagearray_network_throughput" />
+   </row>
+   <row depends="$control_overview$">
+      <panel ref="storagearray_storage_used" app="DA-ITSI-STORAGE" id="storagearray_storage_used" />
+      <panel ref="storagearray_cpu_usage" app="DA-ITSI-STORAGE" id="storagearray_cpu_usage" />
+   </row>
+   <row depends="$control_overview$">
+      <panel ref="storagearray_histogram_storage_used" app="DA-ITSI-STORAGE" id="storagearray_histogram_storage_used" />
+      <panel ref="storagearray_histogram_latency" app="DA-ITSI-STORAGE" id="storagearray_histogram_latency" />
+   </row>
+   <row depends="$control_overview$">
+      <panel ref="storagearray_histogram_storage_throughput" app="DA-ITSI-STORAGE" id="storagearray_histogram_storage_throughput" />
+   </row>
+   <row depends="$control_details$">
+      <panel ref="storagearray_storagepool_count" app="DA-ITSI-STORAGE" id="storagearray_storagepool_count" />
+      <panel ref="storagearray_volume_count" app="DA-ITSI-STORAGE" id="storagearray_volume_count" />
+      <panel ref="storagearray_lun_count" app="DA-ITSI-STORAGE" id="storagearray_lun_count" />
+      <panel ref="storagearray_disk_count" app="DA-ITSI-STORAGE" id="storagearray_disk_count" />
+   </row>
+   <row depends="$control_details$">
+      <panel ref="storagearray_storagepool_summary" app="DA-ITSI-STORAGE" id="storagearraysptable_panel" />
+   </row>
+   <row depends="$control_details$">
+      <panel ref="storagearray_disk_summary" app="DA-ITSI-STORAGE" id="storagearraydisktable_panel" />
+   </row>
+   <row depends="$control_details$">
+      <panel ref="storagearray_volume_summary" app="DA-ITSI-STORAGE" id="storagearrayvolumetable_panel" />
+   </row>
+   <row depends="$control_details$">
+      <panel ref="storagearray_lun_summary" app="DA-ITSI-STORAGE" id="storagearrayluntable_panel" />
+   </row>
+   <row depends="$control_error_events$">
+      <panel ref="storagearray_error_events" app="DA-ITSI-STORAGE" id="storagearray_error_events" />
+   </row>
+   <row depends="$control_events$">
+      <panel ref="storagearray_events" app="DA-ITSI-STORAGE" id="storagearray_events" />
+   </row>
+</dashboard>

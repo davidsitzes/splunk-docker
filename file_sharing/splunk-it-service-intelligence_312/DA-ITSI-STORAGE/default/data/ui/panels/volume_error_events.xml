@@ -1,0 +1,9 @@
+<panel>
+ <event>
+   <search>
+     <query>| savedsearch DA-ITSI-STORAGE-Volume_Error_Events_Search volume_id="$volume_id$"</query>
+     <earliest>$earliest$</earliest>
+     <latest>$latest$</latest>
+   </search>
+ </event>
+</panel>

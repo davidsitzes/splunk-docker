@@ -1,0 +1,11 @@
+<panel>
+  <table id="vmmemusepcnttable">
+    <title>Top 10 Virtual Machines With Highest Memory Usage Percent</title>
+    <search>
+      <query>| savedsearch DA-ITSI-VIRTUALIZATION-Hypervisor_List_Connected_VM_Memory_Usage_Percent hypervisor_id="$hypervisor_id$"</query>
+      <earliest>$earliest$</earliest>
+      <latest>$latest$</latest>
+    </search>
+    <fields>"VM Name","Memory Usage Percent"</fields>
+  </table>
+</panel>

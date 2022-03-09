@@ -1,0 +1,10 @@
+<panel>
+  <event>
+    <title>Error Log Events</title>
+    <search>
+      <query>eventtype=error_log_event</query>
+        <earliest>$earliest$</earliest>
+        <latest>$latest$</latest>
+    </search>
+  </event>
+</panel>

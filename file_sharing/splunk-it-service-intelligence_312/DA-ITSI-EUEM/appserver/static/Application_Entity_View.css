@@ -1,0 +1,34 @@
+.dashboard-row .dashboard-panel .ui-resizable-handle {
+    display: none !important;
+}
+
+.dashboard-body {
+    padding-left: 0px;
+    padding-right: 0px;
+}
+
+.dashboard-header {
+    margin-bottom: 0px;
+    padding-left: 20px;
+    padding-right: 20px;
+}
+
+.dashboard-row .dashboard-panel .dashboard-element:hover .panel-footer {
+    display: none;
+}
+
+#context-panel {
+    height: auto;
+}
+
+#element1 {
+    height: 150px;
+}
+
+#element1 .panel-body-html {
+    padding-top: 0px;
+}
+
+body {
+    min-width: 1280px;
+}

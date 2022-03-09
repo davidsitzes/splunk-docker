@@ -1,0 +1,140 @@
+require.config({
+    paths: {
+        "app": "../app",
+        "currentApp": "../app/DA-ITSI-STORAGE"
+    }
+});
+
+require([
+    'jquery',
+    'underscore',
+    'splunk.util',
+    'splunkjs/mvc',
+    'splunkjs/mvc/utils',
+    'splunkjs/mvc/searchmanager',
+    'currentApp/EntityDrilldownUtils',
+    'splunkjs/mvc/simplexml/ready!'
+], function(
+    $,
+    _,
+    splunkUtil,
+    mvc,
+    splunkjsUtils,
+    SearchManager,
+    EntityDrilldownUtils
+) {
+
+	// Fill entitySearchResult object from itsi_entity lookup table.
+    // Which is used to find clicked entity is exist in lookup or not. If not, new drill down view will not open.
+    var moduleSavedSearch = 'DA-ITSI-STORAGE-Storage_System_Entity_Search';
+    var entityFilterPhrase ='| WHERE itsi_role="storagesystem" ';
+    var entityIdSearch=EntityDrilldownUtils.createEntitySearchManager(moduleSavedSearch,entityFilterPhrase);
+    
+	EntityDrilldownUtils.fetchEntityFromSearchManager(entityIdSearch);
+	
+	// Link STORAGE ARRAY Id in inventory context panel to STORAGE ARRAY Drill Down view
+    //(View link in inventory poupup)
+    $("body").on("entity-fields-change-event", "#inventory-fields-modal", function(e, entity_info) {
+        if (!_.isUndefined(entity_info)){
+			var array_id_value = entity_info["Storage Array Id"];
+            var pool_id_value = entity_info["Storage Pool Id"];
+            var volume_id_value = entity_info["Volume Id"];
+			var fieldsToAdd = {};
+            if(array_id_value != "" ){
+                fieldsToAdd["array_id"] = array_id_value;
+            }
+
+			if(_.isString(array_id_value) && array_id_value.length > 0 ){
+                $("#inventory-fields-modal label:contains('Storage Array Id:')").html("Storage Array Id: <a class='vmds-drilldown external' id='storageArrayLink_model'>" + array_id_value + "</a>");
+                $( "#storageArrayLink_model" ).click(function() {
+                    var url = EntityDrilldownUtils.getOtherEntityDrilldownUrl(array_id_value, '/DA-ITSI-STORAGE-Storage_Array_Entity_View', fieldsToAdd);
+                    splunkjsUtils.redirect(url, true);
+                });
+            }
+            var fieldsToAddPool = {};
+            if(_.isString(pool_id_value) && pool_id_value.length > 0 ){
+                fieldsToAddPool["pool_id"] = pool_id_value;
+            }
+
+            if(_.isString(pool_id_value) && pool_id_value.length > 0 ){
+                $("#inventory-fields-modal label:contains('Storage Pool Id:')").html("Storage Pool Id: <a class='vmds-drilldown external' id='storagePoolLink_model'>" + pool_id_value + "</a>");
+                $( "#storagePoolLink_model" ).click(function() {
+                    var url = EntityDrilldownUtils.getOtherEntityDrilldownUrl(pool_id_value, '/DA-ITSI-STORAGE-Storage_Pool_Entity_View', fieldsToAddPool);
+                    splunkjsUtils.redirect(url, true);
+                });
+            }
+
+            var fieldsToAddVolume = {};
+            if(_.isString(volume_id_value) && volume_id_value.length > 0 ){
+                fieldsToAddVolume["volume_id"] = volume_id_value;
+            }
+
+            if(_.isString(volume_id_value) && volume_id_value.length > 0 ){
+                $("#inventory-fields-modal label:contains('Volume Id:')").html("Volume Id: <a class='vmds-drilldown external' id='volumeLink_model'>" + volume_id_value + "</a>");
+                $( "#volumeLink_model" ).click(function() {
+                    var url = EntityDrilldownUtils.getOtherEntityDrilldownUrl(volume_id_value, '/DA-ITSI-STORAGE-Volume_Entity_View', fieldsToAddVolume);
+                    splunkjsUtils.redirect(url, true);
+                });
+            }
+        }
+    });
+	
+    // (View link in inventory context panel on header of dashboard)
+    $("body").on("entity-fields-change-event", "#entity-context-panel-entity-info", function(e, entity_info) {
+        if (!_.isUndefined(entity_info)){
+            var array_id_value = entity_info["Storage Array Id"];
+            var pool_id_value = entity_info["Storage Pool Id"];
+            var volume_id_value = entity_info["Volume Id"];
+            var fieldsToAdd = {};
+            if(_.isString(array_id_value) && array_id_value.length > 0 ){
+                fieldsToAdd["array_id"] = array_id_value;
+            }
+
+			if(_.isString(array_id_value) && array_id_value.length > 0 ){
+                $("#entity-context-panel-entity-info span:contains('" + array_id_value + "')").filter(function(){
+                    if($(this).text() === array_id_value){
+                        $(this).html("<a class='vmds-drilldown external' id='storageArrayLink_context'>" + array_id_value + "</a>");
+                        $( "#storageArrayLink_context" ).click(function() {
+                            var url = EntityDrilldownUtils.getOtherEntityDrilldownUrl(array_id_value, '/DA-ITSI-STORAGE-Storage_Array_Entity_View', fieldsToAdd);
+                            splunkjsUtils.redirect(url, true);
+                        });
+                    }
+                });
+            }
+
+			var fieldsToAddPool = {};
+            if(_.isString(pool_id_value) && pool_id_value.length > 0 ){
+                fieldsToAddPool["pool_id"] = pool_id_value;
+            }
+
+            if(_.isString(pool_id_value) && pool_id_value.length > 0 ){
+                $("#entity-context-panel-entity-info span:contains('" + pool_id_value + "')").filter(function(){
+                    if($(this).text() === pool_id_value){
+                        $(this).html("<a class='vmds-drilldown external' id='storagePoolLink_context'>" + pool_id_value + "</a>");
+                        $( "#storagePoolLink_context" ).click(function() {
+                            var url = EntityDrilldownUtils.getOtherEntityDrilldownUrl(pool_id_value, '/DA-ITSI-STORAGE-Storage_Pool_Entity_View', fieldsToAddPool);
+                            splunkjsUtils.redirect(url, true);
+                        });
+                    }
+                });
+            }
+
+            var fieldsToAddVolume = {};
+            if(_.isString(volume_id_value) && volume_id_value.length > 0 ){
+                fieldsToAddVolume["volume_id"] = volume_id_value;
+            }
+
+            if(_.isString(volume_id_value) && volume_id_value.length > 0 ){
+                $("#entity-context-panel-entity-info span:contains('" + volume_id_value + "')").filter(function(){
+                    if($(this).text() === volume_id_value){
+                        $(this).html("<a class='vmds-drilldown external' id='volumeLink_context'>" + volume_id_value + "</a>");
+                        $( "#volumeLink_context" ).click(function() {
+                            var url = EntityDrilldownUtils.getOtherEntityDrilldownUrl(volume_id_value, '/DA-ITSI-STORAGE-Volume_Entity_View', fieldsToAddVolume);
+                            splunkjsUtils.redirect(url, true);
+                        });
+                    }
+                });
+            }
+        }
+    });
+});

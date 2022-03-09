@@ -1,0 +1,91 @@
+[]
+export = system
+
+[correlationsearches]
+access = read : [ * ], write: [ itoa_admin, itoa_team_admin ], delete: [ itoa_admin, itoa_team_admin ]
+export = system
+
+[savedsearches]
+access = read : [ * ], write: [ itoa_admin, itoa_team_admin ], delete: [ itoa_admin, itoa_team_admin ]
+export = system
+
+[views/saved_homepage_lister]
+access = read : [ * ], write: [ itoa_admin, itoa_team_admin ], delete: [ itoa_admin, itoa_team_admin ]
+
+[views/services_lister]
+access = read : [ itoa_admin, itoa_team_admin ], write: [ itoa_admin, itoa_team_admin ], delete: [ itoa_admin, itoa_team_admin ]
+
+[views/service_templates_lister]
+access = read : [ itoa_admin, itoa_team_admin ], write: [ itoa_admin, itoa_team_admin ], delete: [ itoa_admin, itoa_team_admin]
+
+[views/kpi_base_searches_lister]
+access = read : [ itoa_admin, itoa_team_admin ], write: [ itoa_admin, itoa_team_admin], delete: [ itoa_admin, itoa_team_admin ]
+
+[views/kpi_threshold_templates_lister]
+access = read : [ itoa_admin, itoa_team_admin ], write: [ itoa_admin, itoa_team_admin ], delete: [ itoa_admin, itoa_team_admin]
+
+[views/service_definition]
+access = read : [ itoa_admin, itoa_team_admin ], write: [ itoa_admin, itoa_team_admin ], delete: [ itoa_admin, itoa_team_admin ]
+
+[views/entities_lister]
+access = read : [ itoa_admin, itoa_team_admin ], write: [ itoa_admin, itoa_team_admin ], delete: [ itoa_admin, itoa_team_admin ]
+
+[views/backup_restore_lister]
+access = read : [ itoa_admin ], write: [ itoa_admin ], delete: [ itoa_admin ]
+
+[views/maintenance_windows_lister]
+access = read : [ itoa_admin, itoa_team_admin ], write: [ itoa_admin, itoa_team_admin ], delete: [ itoa_admin, itoa_team_admin ]
+
+[views/notable_event_aggregation_policies_lister]
+access = read : [ itoa_admin, itoa_team_admin, itoa_analyst ], write: [ itoa_admin, itoa_team_admin ], delete: [ itoa_admin, itoa_team_admin ]
+
+[views/teams_lister]
+access = read : [ itoa_admin, itoa_team_admin ], write: [ itoa_admin, itoa_team_admin ], delete: [ itoa_admin, itoa_team_admin ]
+
+[views/notable_event_aggregation_policy_configuration_view]
+access = read : [ itoa_admin, itoa_team_admin, itoa_analyst ], write: [ itoa_admin, itoa_team_admin ], delete: [ itoa_admin, itoa_team_admin ]
+
+[views/notable_event_aggregation_policy_detail_view]
+access = read : [ itoa_admin, itoa_team_admin, itoa_analyst ], write: [ itoa_admin, itoa_team_admin ], delete: [ itoa_admin, itoa_team_admin ]
+
+[views/homeview]
+access = read : [ itoa_admin, itoa_team_admin, itoa_analyst, itoa_user ], write: [ itoa_admin, itoa_team_admin ], delete: [ itoa_admin, itoa_team_admin ]
+
+[views/glass_table_editor]
+access = read : [ itoa_admin, itoa_team_admin, itoa_analyst, itoa_user ], write: [ itoa_admin, itoa_team_admin ], delete: [ itoa_admin, itoa_team_admin ]
+
+[views/glass_tables_lister]
+access = read : [ itoa_admin, itoa_team_admin, itoa_analyst, itoa_user ], write: [itoa_admin, itoa_team_admin], delete: [ itoa_admin, itoa_team_admin ]
+
+[views/saved_deep_dive_lister]
+access = read : [ itoa_admin, itoa_team_admin, itoa_analyst, itoa_user ], write: [itoa_admin, itoa_team_admin], delete: [ itoa_admin, itoa_team_admin ]
+
+[views/event_management_state_lister]
+access = read : [ itoa_admin, itoa_team_admin, itoa_analyst, itoa_user ], write: [itoa_admin, itoa_team_admin], delete: [ itoa_admin, itoa_team_admin ]
+
+[views/deep_dive]
+access = read : [ itoa_admin, itoa_team_admin, itoa_analyst, itoa_user ], write: [itoa_admin, itoa_team_admin], delete: [ itoa_admin, itoa_team_admin ]
+
+[views/correlation_searches_lister]
+access = read : [ itoa_admin, itoa_team_admin, itoa_analyst, itoa_user ], write: [itoa_admin, itoa_team_admin], delete: [ itoa_admin, itoa_team_admin ]
+
+[views/correlation_search_edit]
+access = read : [ itoa_admin, itoa_team_admin, itoa_analyst ], write: [itoa_admin, itoa_team_admin], delete: [ itoa_admin, itoa_team_admin ]
+
+[views/maintenance_window_detail_view]
+access = read : [ itoa_admin, itoa_team_admin ], write: [ itoa_admin, itoa_team_admin ], delete: [ itoa_admin, itoa_team_admin ]
+
+[views/alarm_console]
+access = read : [ itoa_admin, itoa_team_admin, itoa_analyst , itoa_user ], write: [itoa_admin, itoa_team_admin], delete: [ itoa_admin, itoa_team_admin ]
+
+[views/itsi_event_management]
+access = read : [ itoa_admin, itoa_team_admin, itoa_analyst, itoa_user ], write: [itoa_admin, itoa_team_admin], delete: [ itoa_admin, itoa_team_admin ]
+
+[views/service_importer]
+access = read : [ itoa_admin ], write: [ itoa_admin ], delete: [ itoa_admin ]
+
+[views/itsi_modules_lister]
+access = read : [ itoa_admin ], write: [ itoa_admin ], delete: [ itoa_admin ]
+
+[views/itsi_module]
+access = read : [ itoa_admin ], write: [ itoa_admin ], delete: [ itoa_admin ]

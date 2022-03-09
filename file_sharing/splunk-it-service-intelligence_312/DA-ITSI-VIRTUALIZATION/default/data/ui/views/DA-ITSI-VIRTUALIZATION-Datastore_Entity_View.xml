@@ -1,0 +1,67 @@
+<dashboard script="DA-ITSI-VIRTUALIZATION-Datastore_Entity_View.js" isVisible="False">
+   <label>Datastore Details</label>
+   <row>
+      <panel>
+         <viz type="SA-ITSI-CustomModuleViz.entity_info_header">
+           <option name="link.visible">false</option>
+           <option name="refresh.time.visible">false</option>
+           <search>
+             <query>| savedsearch DA-ITSI-VIRTUALIZATION-Datastore_Inventory_Search datastore_id="$datastore_id$"</query>
+             <earliest>-4d</earliest>
+             <latest>now</latest>
+           </search>
+         </viz>
+         <viz type="SA-ITSI-CustomModuleViz.mini_chart">
+           <option name="SA-ITSI-CustomModuleViz.mini_chart.id">datastore-events</option>
+           <option name="SA-ITSI-CustomModuleViz.mini_chart.title">Datastore Events (count)</option>
+           <option name="SA-ITSI-CustomModuleViz.mini_chart.subtitleField">_total</option>
+           <option name="SA-ITSI-CustomModuleViz.mini_chart.chartType">column</option>
+           <search>
+             <query>| savedsearch DA-ITSI-VIRTUALIZATION-Datastore_Context_Chart_Event_Search datastore_id="$datastore_id$"</query>
+             <earliest>$earliest$</earliest>
+             <latest>$latest$</latest>
+           </search>
+         </viz>
+         <viz type="SA-ITSI-CustomModuleViz.mini_chart">
+           <option name="SA-ITSI-CustomModuleViz.mini_chart.id">datastore-usage</option>
+           <option name="SA-ITSI-CustomModuleViz.mini_chart.title">Datastore Usage (%)</option>
+           <option name="SA-ITSI-CustomModuleViz.mini_chart.subtitleField">_stats</option>
+           <option name="SA-ITSI-CustomModuleViz.mini_chart.chartType">area</option>
+           <search>
+             <query>| savedsearch DA-ITSI-VIRTUALIZATION-Datastore_Context_Chart_Storage_Usage_Search datastore_id="$datastore_id$"</query>
+             <earliest>$earliest$</earliest>
+             <latest>$latest$</latest>
+           </search>
+         </viz>
+      </panel>
+   </row>
+   <row id="tabs">
+      <panel id="tabs_panel">
+         <viz type="SA-ITSI-CustomModuleViz.tab_viz">
+           <option name="link.visible">false</option>
+           <option name="refresh.time.visible">false</option>
+           <search>
+             <query>|noop | stats count</query>
+           </search>
+         </viz>
+      </panel>
+   </row>
+   <row depends="$control_overview$">
+      <panel ref="datastore_highest_latency" app="DA-ITSI-VIRTUALIZATION" id="datastore_highest_latency" />
+      <panel ref="datastore_read_write_latency" app="DA-ITSI-VIRTUALIZATION" id="datastore_read_write_latency" />
+   </row>
+   <row depends="$control_overview$">
+      <panel ref="datastore_storage_usage" app="DA-ITSI-VIRTUALIZATION" id="datastore_storage_usage" />
+      <panel ref="datastore_used_percent" app="DA-ITSI-VIRTUALIZATION" id="datastore_used_percent" />
+   </row>
+   <row depends="$control_overview$">
+      <panel ref="datastore_details" app="DA-ITSI-VIRTUALIZATION" id="datastore_details" />
+      <panel ref="datastore_hypervisor_list" app="DA-ITSI-VIRTUALIZATION" id="dshypervisortable_panel" />
+   </row>
+   <row depends="$control_overview$">
+      <panel ref="datastore_vm_list" app="DA-ITSI-VIRTUALIZATION" id="dsvmtable_panel" />
+   </row>
+   <row depends="$control_datastore_events$">
+      <panel ref="datastore_events" app="DA-ITSI-VIRTUALIZATION" id="datastore_events" />
+   </row>
+</dashboard>

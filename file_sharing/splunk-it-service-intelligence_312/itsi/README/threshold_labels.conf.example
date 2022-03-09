@@ -1,0 +1,24 @@
+# Copyright (C) 2005-2018 Splunk Inc. All Rights Reserved.
+#
+# This file contains examples for threshold_label.conf file
+
+[info]
+color = #6ab7c7
+threshold_level = 1
+
+[low]
+color = #65A637
+threshold_level = 2
+
+[medium]
+color =  #fac51c
+threshold_level = 3
+
+[high]
+color = #f7902b
+threshold_level = 4
+
+[critical]
+color = #d85d3c
+threshold_level = 5
+

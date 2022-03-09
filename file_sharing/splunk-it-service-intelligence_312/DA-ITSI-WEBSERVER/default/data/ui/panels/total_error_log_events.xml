@@ -1,0 +1,13 @@
+<panel>
+  <chart>
+    <title>Total Error Log Events</title>
+    <search>
+      <query>eventtype=error_log_event | timechart count(_raw) as "Errors"</query>
+      <earliest>$earliest$</earliest>
+      <latest>$latest$</latest>
+    </search>
+    <option name="charting.axisTitleX.text">time</option>
+    <option name="charting.chart">column</option>
+    <option name="charting.data.count">0</option>
+  </chart>
+</panel>

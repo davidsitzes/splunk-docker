@@ -1,0 +1,10 @@
+<panel>
+  <table>
+    <title>Status By Browser Agent (2xx, 3xx, 4xx, 5xx)</title>
+    <search>
+      <query><![CDATA[web_server=$web_server$ tag=web tag=activity | eval 2xx=if(status >= 200 AND status < 300, status, null()), 3xx=if(status >= 300 AND status < 400, status, null()), 4xx=if(status >= 400 AND status < 500, status, null()), 5xx=if(status >= 500 AND status < 600, status, null()) | stats count(2xx) as 2xx, count(3xx) as 3xx, count(4xx) as 4xx, count(5xx) as 5xx by http_user_agent | sort -5xx,-4xx]]></query>
+      <earliest>$earliest$</earliest>
+      <latest>$latest$</latest>
+    </search>
+  </table>
+</panel>

@@ -1,0 +1,75 @@
+<form>
+  <label>ITSI Health Check</label>
+  <description>This dashboard reports the status of ITSI KV Store collections. It also lists any duplicate entity aliases in your ITSI environment. </description>
+  <search id="base_errors">
+    <query>
+      <![CDATA[
+           index=_internal source=*itsi*.log*
+           | rex "\s(?<log_level>(INFO|ER\w+|WAR\w+|FAT\w+|DEBUG|CRI\w+))\s+\["
+           | fillnull log_level value="UNKNOWN"
+           | eval log_level=case(log_level="WAR","WARNING",1=1,log_level)
+          | rex mode=sed field=component "s/(.*)-\d+/\1/"
+          | bucket _time span=5m
+          | stats count by _time log_level component host
+    ]]>
+    </query>
+    <earliest>$field1.earliest$</earliest>
+    <latest>$field1.latest$</latest>
+  </search>
+  <fieldset submitButton="true">
+    <input type="time" token="field1">
+      <label></label>
+      <default>
+        <earliest>-24h@h</earliest>
+        <latest>now</latest>
+      </default>
+    </input>
+  </fieldset>
+  <row>
+    <panel>
+      <html><h2>If more than one entity is using the same alias field value, KPI base searches might have incorrect statistical aggregation results. To remedy duplicate entity alias values, click <b>Configure</b> > <b>Entities</b> and edit the entity definitions for the entities with duplicate aliases. Keep the alias value for one of the entities and edit the others to remove the duplicate alias value. <a href=" http://docs.splunk.com/Documentation/ITSI/latest/Configure/Installationandconfigurationconsiderationsandissues#Duplicate_entity_aliases" target="_blank">Learn More </a></h2></html>
+      <table>
+        <title>Check for Duplicate Entity Aliases</title>
+        <search>
+          <query>
+            <![CDATA[
+		| inputlookup itsi_entities 
+                | eval identical_alias='identifier.values'   
+                | mvexpand identical_alias 
+                | eval entity_key=_key 
+                | stats count AS duplicate_occurences  values(title) AS entity_name values(services._key) AS service_keys  values(entity_key) AS entity_keys  by identical_alias | where duplicate_occurences>1
+	    ]]>
+          </query>
+          <earliest>-24h@h</earliest>
+          <latest>now</latest>
+          <sampleRatio>1</sampleRatio>
+        </search>
+        <option name="count">20</option>
+        <option name="dataOverlayMode">none</option>
+        <option name="drilldown">none</option>
+        <option name="percentagesRow">false</option>
+        <option name="rowNumbers">false</option>
+        <option name="totalsRow">false</option>
+        <option name="wrap">true</option>
+      </table>
+      <table>
+        <title>KV Store Collections</title>
+        <search>
+          <query>| rest splunk_server=local /services/server/introspection/kvstore/collectionstats
+| mvexpand data
+| spath input=data
+| rex field=ns "(?&lt;App&gt;.*)\.(?&lt;Collection&gt;.*)"
+| eval dbsize=size/1024/1024
+| eval indexsize=totalIndexSize/1024/1024
+| stats first(count) AS "Number of Objects" first(nindexes) AS Accelerations first(indexsize) AS "Acceleration Size (MB)" first(dbsize) AS "Collection Size (MB)" by App,Collection
+| sort - 'Number of Objects'</query>
+          <earliest>-24h@h</earliest>
+          <latest>now</latest>
+        </search>
+        <option name="count">10</option>
+        <option name="drilldown">none</option>
+        <option name="refresh.display">progressbar</option>
+      </table>
+    </panel>
+  </row>
+</form>

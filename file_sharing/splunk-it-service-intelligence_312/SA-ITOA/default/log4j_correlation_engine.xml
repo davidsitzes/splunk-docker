@@ -1,0 +1,28 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<configuration>
+    <properties>
+        <property name="name">itsi_correlation_engine</property>
+        <property name="pattern">%d{ISO8601} %d{Z} %-5p [%t] %c{1}:%L - %m%n</property>
+    </properties>
+    <appenders>
+        <Console name="Console" target="SYSTEM_OUT">
+            <PatternLayout pattern="${pattern}"/>
+        </Console>
+        <RollingFile name="RollingFile" fileName="${env:SPLUNK_HOME}/var/log/splunk/${name}.log"
+                     filePattern="${env:SPLUNK_HOME}/var/log/splunk/${name}-%i.log">
+            <PatternLayout>
+                <pattern>${pattern}</pattern>
+            </PatternLayout>
+            <Policies>
+                <SizeBasedTriggeringPolicy size="5 MB"/>
+            </Policies>
+            <DefaultRolloverStrategy max="5"/>
+        </RollingFile>
+    </appenders>
+    <loggers>
+        <root level="info">
+            <!--<appender-ref ref="Console"/> &lt;!&ndash; To console &ndash;&gt;-->
+            <appender-ref ref="RollingFile"/> <!-- And to a rotated file -->
+        </root>
+    </loggers>
+</configuration>

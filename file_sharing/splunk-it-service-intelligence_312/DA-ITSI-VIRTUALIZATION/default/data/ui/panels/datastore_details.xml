@@ -1,0 +1,10 @@
+<panel>
+  <table>
+    <title>Datastore Details</title>
+    <search>
+      <query>| savedsearch DA-ITSI-VIRTUALIZATION-Datastore_Details_Search datastore_id="$datastore_id$"</query>
+      <earliest>$earliest$</earliest>
+      <latest>$latest$</latest>
+    </search>
+  </table>
+</panel>

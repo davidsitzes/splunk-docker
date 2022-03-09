@@ -1,0 +1,26 @@
+<panel>
+  <table>
+    <title>Top 10 Memory Consumers</title>
+    <search>
+      <query>
+index=* host=$host$ tag=oshost tag=performance tag=process (process_mem_used=* OR process_cpu_used_percent=* OR process_name=*) 
+| addinfo 
+| where _time > relative_time(min(info_max_time, now()), "-2m") 
+| eval process_mem_used=round(process_mem_used/1024.0/1024.0, 2) 
+| eval process_cpu_used_percent=round(process_cpu_used_percent, 2) 
+| rename process_name as Process 
+| stats latest(process_cpu_used_percent) as "CPU %", latest(process_mem_used) as "Memory (MB)" by Process, pid
+| fields - pid
+| sort limit=10 -"Memory (MB)"
+      </query>
+      <earliest>$earliest$</earliest>
+      <latest>$latest$</latest>
+    </search>
+    <option name="wrap">true</option>
+    <option name="rowNumbers">false</option>
+    <option name="drilldown">cell</option>
+    <option name="dataOverlayMode">none</option>
+    <option name="count">10</option>
+    <option name="refresh.time.visible">false</option>
+  </table>
+</panel>

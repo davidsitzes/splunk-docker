@@ -1,0 +1,25 @@
+<panel>
+  <table>
+    <title>Device IO Statistics</title>
+    <search>
+      <query>
+index=* host=$host$ tag=oshost tag=performance tag=storage (read_ops=* OR write_ops=* OR mount=*) 
+| stats latest(total_ops) as TotalOps, latest(read_ops) as ReadOps, latest(write_ops) as WriteOps by mount 
+| eval "Total Ops/s" = round(TotalOps, 2) 
+| eval "Read Ops/s" = round(ReadOps, 2) 
+| eval "Write Ops/s" = round(WriteOps, 2) 
+| fields - TotalOps, ReadOps, WriteOps 
+| rename mount as "Device" 
+| search "Total Ops/s"=*
+      </query>
+      <earliest>$earliest$</earliest>
+      <latest>$latest$</latest>
+    </search>
+    <option name="wrap">true</option>
+    <option name="rowNumbers">false</option>
+    <option name="drilldown">cell</option>
+    <option name="dataOverlayMode">none</option>
+    <option name="count">10</option>
+    <option name="refresh.time.visible">false</option>
+  </table>
+</panel>

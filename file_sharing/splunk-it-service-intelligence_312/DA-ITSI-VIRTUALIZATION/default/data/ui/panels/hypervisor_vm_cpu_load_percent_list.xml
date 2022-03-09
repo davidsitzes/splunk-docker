@@ -1,0 +1,11 @@
+<panel>
+  <table id="vmcpupercenttable">
+    <title>Top 10 Virtual Machines With Highest CPU Utilization</title>
+    <search>
+      <query>| savedsearch DA-ITSI-VIRTUALIZATION-Hypervisor_List_Connected_VM_CPU_Load_Percent hypervisor_id="$hypervisor_id$"</query>
+      <earliest>$earliest$</earliest>
+      <latest>$latest$</latest>
+    </search>
+    <fields>"VM Name","CPU Utilization (%)"</fields>
+  </table>
+</panel>

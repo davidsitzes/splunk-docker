@@ -1,0 +1,9 @@
+<panel>
+ <event>
+   <search>
+     <query>| savedsearch DA-ITSI-STORAGE-Storage_Array_Error_Events_Search array_id="$array_id$"</query>
+     <earliest>$earliest$</earliest>
+     <latest>$latest$</latest>
+   </search>
+ </event>
+</panel>

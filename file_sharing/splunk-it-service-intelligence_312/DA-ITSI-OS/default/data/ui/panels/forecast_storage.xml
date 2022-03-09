@@ -1,0 +1,26 @@
+<panel>
+    <chart>
+        <title>Storage Used (GB)</title>
+        <search>
+            <query>
+                index=* host=$host$ tag=oshost tag=performance tag=storage (storage_free_percent=* OR storage=* storage_used=* OR mount=*)
+                | bucket _time span=1d
+                | stats avg(storage_used) as "Used" by _time, mount
+                | stats sum(Used) as Used by _time
+                | eval Used_GB = round(Used/1024, 2)
+                | timechart fixedrange=false span=1d avg(Used_GB) as "Used (GB)"
+                | predict "Used (GB)" as "prediction Used (GB)" future_timespan=14
+            </query>
+            <earliest>$earliest$</earliest>
+            <latest>$latest$</latest>
+        </search>
+        <option name="charting.chart">area</option>
+        <!--  <option name="charting.axisLabelsX.majorLabelVisibility">hide</option> -->
+        <option name="charting.axisTitleX.visibility">collapsed</option>
+        <option name="charting.chart.nullValueMode">connect</option>
+        <option name="charting.chart.showDataLabels">none</option>
+        <option name="charting.legend.placement">top</option>
+        <option name="charting.chart.stackMode">stacked</option>
+        <option name="refresh.time.visible">false</option>
+    </chart>
+</panel>

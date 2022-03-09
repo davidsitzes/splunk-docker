@@ -1,0 +1,9 @@
+<panel>
+ <event>
+   <search>
+     <query>| savedsearch DA-ITSI-VIRTUALIZATION-VM_Events_Search vm_id="$vm_id$"</query>
+     <earliest>$earliest$</earliest>
+     <latest>$latest$</latest>
+   </search>
+ </event>
+</panel>

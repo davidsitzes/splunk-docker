@@ -1,0 +1,31 @@
+<panel>
+  <title>Histogram for LUN Storage Throughput (MBps)</title>
+  <chart>
+    <search>
+      <query>| savedsearch DA-ITSI-STORAGE-LUN_Histogram_Chart_Storage_Throughput_Search lun_id="$lun_id$"</query>
+      <earliest>$earliest$</earliest>
+      <latest>$latest$</latest>
+    </search>
+	<option name="charting.axisTitleX.visibility">visible</option>
+	<option name="charting.axisTitleY.visibility">visible</option>
+	<option name="charting.axisX.scale">linear</option>
+	<option name="charting.axisY.scale">linear</option>
+	<option name="charting.chart">column</option>
+	<option name="charting.fieldColors">{"0-20":0x99D18B,"20-40":0x31A35F, "40-60":0xFFE98C, "60-80":0xFCB64E, "80-100":0xF26A35, "Higher":0xB50101}</option>
+	<option name="charting.chart.bubbleSizeBy">area</option>
+	<option name="charting.chart.nullValueMode">gaps</option>
+	<option name="charting.chart.showDataLabels">none</option>
+	<option name="charting.chart.stackMode">stacked</option>
+	<option name="charting.legend.placement">top</option>
+    <option name="refresh.time.visible">false</option>
+	<option name="charting.drilldown">all</option>
+	<drilldown>
+		<condition field="Higher">
+			<link target="blank">search?earliest=$earliest$&amp;latest=$latest$&amp;q=tag=lun tag=performance tag=storagesystem storage_read_throughput=* storage_write_throughput=* lun_id=$lun_id$ | eval storage_throughput_mbps=(storage_read_throughput%2Bstorage_write_throughput)/1024 | where storage_throughput_mbps>=100</link>
+		</condition>
+		<condition>
+			<link target="blank">search?earliest=$earliest$&amp;latest=$latest$&amp;q=tag=lun tag=performance tag=storagesystem storage_read_throughput=* storage_write_throughput=* lun_id=$lun_id$ | eval storage_throughput_mbps=(storage_read_throughput%2Bstorage_write_throughput)/1024, range=split("$click.name2$","-") | eval lowerlimit= mvindex(range,0) , upperlimit=mvindex(range,1) | where storage_throughput_mbps&gt;lowerlimit AND storage_throughput_mbps&lt;upperlimit</link>
+		</condition>
+	</drilldown>
+  </chart>
+</panel>

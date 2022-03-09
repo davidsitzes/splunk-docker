@@ -1,0 +1,7 @@
+# shared Application-level permissions
+[]
+access = read : [ * ], write : [ admin ]
+export = system
+
+[panels]
+export = none
